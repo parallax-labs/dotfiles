@@ -143,6 +143,12 @@
     vlc
     tmux
     cheat
+    zsh
+    unzip
+    unrar
+    curl
+    telnet
+    p7zip
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
