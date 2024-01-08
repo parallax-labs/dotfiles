@@ -84,17 +84,21 @@
   virtualisation.containers.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
+  
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.parallaxis = {
-    isNormalUser = true;
-    description = "Parker Jones";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      firefox
-      kate
-    #  thunderbird
-    ];
+  users.users = {
+    parallaxis = {
+      isNormalUser = true;
+      description = "Parker Jones";
+      extraGroups = [ "networkmanager" "wheel" ];
+      shell = pkgs.zsh;
+      packages = with pkgs; [
+        firefox
+        kate
+        #  thunderbird
+      ];
+    };
+    defaultUserShell = pkgs.zsh; # Make zsh default shell
   };
 
   home-manager = {

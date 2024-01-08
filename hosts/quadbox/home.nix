@@ -82,7 +82,16 @@
       ll = "ls -l";
       update = "sudo nixos-rebuild switch";
     };
+    #ohMyZsh = {
+    #  enable = true;
+    #  plugins = [ "git" "thefuck" ];
+    #  theme = "robbyrussell";
+    #};
     #histSize = 10000;
     #histFile = "${config.xdg.dataHome}/zsh/history";
   };
+
+  #users.defaultUserShell = pkgs.zsh;
+
+  #environment.shells = with pkgs; [ zsh ];
 }
