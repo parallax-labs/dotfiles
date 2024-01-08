@@ -20,7 +20,7 @@
       nixosConfigurations.quadbox = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs;};
           modules = [ 
-            ./hosts/quabox/configuration.nix
+            ./hosts/quadbox/configuration.nix
             inputs.home-manager.nixosModules.default
           ];
         };
