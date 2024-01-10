@@ -84,10 +84,10 @@
   virtualisation.containers.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-  
+  programs.zsh.enable = true; 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users = {
-    parallaxis = {
+  users = {
+    users.parallaxis = {
       isNormalUser = true;
       description = "Parker Jones";
       extraGroups = [ "networkmanager" "wheel" ];
@@ -144,11 +144,6 @@
     tmux
     cheat
     zsh
-    unzip
-    unrar
-    curl
-    telnet
-    p7zip
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
