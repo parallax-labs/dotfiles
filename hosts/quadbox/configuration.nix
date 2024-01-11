@@ -18,16 +18,41 @@
   boot.initrd.luks.devices."luks-61b8a140-943e-45d3-a9fe-7f2277fec922".device = "/dev/disk/by-uuid/61b8a140-943e-45d3-a9fe-7f2277fec922";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  
+  networking = {
+    hostName = "quadbox";
+    enableIPv6 = false;
+    interfaces = {
+      wlp5s0 = {
+      	useDHCP = false;
+	ipv4.addresses = [
+	  { address = "192.168.0.121"; prefixLength = 24; }
+	];
+      };
+      enp7s0 = {
+      	useDHCP = false;
+	ipv4.addresses = [
+	  { address = "192.168.0.122"; prefixLength = 24; }
+	];
+      };
+    };
+    networkmanager = {
+      enable = true;
+    };
+  };
 
-  networking.hostName = "quadbox"; # Define your hostname.
+  #networking.hostName = "quadbox"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
+  #networking.interfaces.wlp5s0.useDHCP = false;
+  #networking.interfaces.wlp3s0.ipv4.addresses = [
+  #  { address = "192.168.0.169"; prefixLength = 24; }
+  #];
   # Enable networking
-  networking.networkmanager.enable = true;
+  #networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -97,6 +122,25 @@
         kate
         #  thunderbird
       ];
+      openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAao6hYRda8Dc88DgWHblVFV/HFCcj6kJuDWq7oqt7Aq"
+    ];
+
+    };
+    users.pkearfott = {
+      isNormalUser = true;
+      description = "Parker Jones";
+      extraGroups = [ "networkmanager" "wheel" ];
+      shell = pkgs.zsh;
+      packages = with pkgs; [
+        firefox
+        kate
+        #  thunderbird
+      ];
+      openssh.authorizedKeys.keys = [
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCyhsUy9A6AuNzKcn1HdN4AY1SQhfB30h0TtTWvqPCStGnXVZn6v5EKi3eGWUhxDbSd7o43dC2oNcFs9SdsVO75M5KcHl+0YntznbsgOpdsTlRJR2RSf+ipFM4azVucR4gqjjUCLunWzT5+s7mpmlSV46qXqXdJv6WurbXHcYZDOTReP+zLm+kx5xKBls+HJmsCzq7aYFVwQCawiq+2iXFe5uySwZcpHdPJyP5eDzB22Ta8oJYowOilZy0JtRdVVIBwy0YwKvo/JABWfTMuNyzg4PlUOaT+cB1cA+6P6cbEoqFw1KTnfuWUdlVPjNO6/sKNPmGtZU7vxWMgFVhVk9HBweiHaLiQNrTZEbSIzeLT6DzZytq7NFM6Nog88uxTmVn+p3GSeyblgScPn2dGaWoUzqZvzvox/9W9e81vcWwjVaOpAu8EKGUOI1bbk3RAJXLrnhUYvM3GZA1iHfHWNaQ0wxVpK3QlFzZyHbFmRqCOqHJzJZQpK7ugjPsJ/LbWeFE= pkearfott@mac-pkearfott.local"
+    ];
+
     };
     defaultUserShell = pkgs.zsh; # Make zsh default shell
   };
@@ -105,7 +149,8 @@
     # also pass inputs to home-manager modules
     extraSpecialArgs = {inherit inputs;};
     users = {
-      "parallaxis" = import ./home.nix;
+      "parallaxis" = import ./parallaxis.nix;
+      "pkearfott" = import ./pkearfott.nix;
     };
   };
 
@@ -157,13 +202,17 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = true;
+    ports = [ 22 51685 ];
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
