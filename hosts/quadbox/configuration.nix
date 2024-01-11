@@ -22,17 +22,22 @@
   networking = {
     hostName = "quadbox";
     enableIPv6 = false;
+    defaultGateway = "192.168.1.254";
+    nameservers = [ 
+      "8.8.8.8"
+      "8.8.4.4"
+    ];
     interfaces = {
-      wlp5s0 = {
-      	useDHCP = false;
-	ipv4.addresses = [
-	  { address = "192.168.0.121"; prefixLength = 24; }
-	];
-      };
+      # wlp5s0 = {
+      #	 useDHCP = false;
+      #  ipv4.addresses = [
+      #	   { address = "192.168.0.121"; prefixLength = 24; }
+      #	 ];
+      #};
       enp7s0 = {
       	useDHCP = false;
 	ipv4.addresses = [
-	  { address = "192.168.0.122"; prefixLength = 24; }
+	  { address = "192.168.1.122"; prefixLength = 24; }
 	];
       };
     };
