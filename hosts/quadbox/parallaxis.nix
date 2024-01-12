@@ -86,8 +86,8 @@
   programs.zsh = {
     enable = true;
     shellAliases = {
-      ll = "ls -l";
-      update = "sudo nixos-rebuild switch --flake ~/.dotfiles";
+      ll = "eza -l";
+      update = "nixos-rebuild switch --flake ~/.dotfiles";
     };
     #ohMyZsh = {
     #  enable = true;
