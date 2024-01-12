@@ -1,10 +1,13 @@
-{ config, pkgs, ... }:
-
-{
+{pkgs, ...}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "parallaxis";
-  home.homeDirectory = "/home/parallaxis";
+
+  home = {
+    username = "parallaxis";
+    homeDirectory = "/home/parallaxis/";
+  };
+  #home.username = "parallaxis";
+  #home.homeDirectory = "/home/parallaxis";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -35,7 +38,7 @@
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
-    (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    (pkgs.nerdfonts.override {fonts = ["FantasqueSansMono"];})
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your

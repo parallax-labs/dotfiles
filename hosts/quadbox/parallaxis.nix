@@ -87,6 +87,7 @@
     enable = true;
     shellAliases = {
       ll = "eza -l";
+      nvim = "nix run .#neovim";
       update = "nixos-rebuild switch --flake ~/.dotfiles";
     };
     #ohMyZsh = {
