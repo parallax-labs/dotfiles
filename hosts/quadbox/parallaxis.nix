@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "parallaxis";
@@ -36,7 +38,7 @@
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
-    (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    pkgs.nerdfonts
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -87,7 +89,7 @@
     enable = true;
     shellAliases = {
       ll = "eza -l";
-      nvim = "nix run .#neovim";
+      #nvim = "nix run ~/.dotfiles#neovim";
       update = "nixos-rebuild switch --flake ~/.dotfiles";
     };
     #ohMyZsh = {
@@ -103,4 +105,3 @@
 
   #environment.shells = with pkgs; [ zsh ];
 }
-
