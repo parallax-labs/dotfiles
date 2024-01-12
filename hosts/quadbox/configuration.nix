@@ -194,7 +194,7 @@
     tmux
     cheat
     zsh
-    inputs.neovim-flake
+    #inputs.neovim-flake.defaultPackage.x86_64-linux
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

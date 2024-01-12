@@ -52,6 +52,12 @@
     nixosConfigurations.quadbox = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
+        ({ config, pkgs, ... }: {
+          environment.systemPackages = with pkgs; [
+            # other system packages...
+            customNeovim
+          ];
+        })
         ./hosts/quadbox/configuration.nix
         inputs.home-manager.nixosModules.default
       ];
