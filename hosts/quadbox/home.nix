@@ -103,7 +103,7 @@
     #histFile = "${config.xdg.dataHome}/zsh/history";
   };
 
-  #users.defaultUserShell = pkgs.zsh;
+  users.defaultUserShell = pkgs.zsh;
 
-  #environment.shells = with pkgs; [ zsh ];
+  environment.shells = with pkgs; [ zsh ];
 }
