@@ -16,7 +16,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.luks.devices."luks-61b8a140-943e-45d3-a9fe-7f2277fec922".device = "/dev/disk/by-uuid/61b8a140-943e-45d3-a9fe-7f2277fec922";
-
+  #boot.initrd.kernelModules = [ "amdgpu" ];
+  
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
   networking = {
@@ -116,6 +117,12 @@
   # services.xserver.libinput.enable = true;
   programs.zsh.enable = true; 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+  
   users = {
     users.parallaxis = {
       isNormalUser = true;
